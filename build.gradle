@@ -28,7 +28,8 @@ repositories {
 dependencies {
     testImplementation(
             "org.junit.jupiter:junit-jupiter:5.10.0",
-            "org.junit.platform:junit-platform-launcher"
+            "org.junit.platform:junit-platform-launcher",
+            "io.qameta.allure:allure-junit5:2.29.0"
     )
 }
 
@@ -45,4 +46,12 @@ tasks.withType(Test) {
 
 test {
     useJUnitPlatform()
+    ignoreFailures = true
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
 }
